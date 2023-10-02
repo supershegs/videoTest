@@ -4,6 +4,7 @@ db.sqlite3
 *.pyc
 .env
 *.mp4
+*.mp3
 
 *.wav
 *.ppm
