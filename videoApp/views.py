@@ -17,11 +17,11 @@ class VideoChunkUploadView(APIView):
     parser_classes = (MultiPartParser,)
 
     def post(self, request, format=None):
-        print(request.data)
+        print('Printed data/file received before any processing: ',request.data)
         blob_type = request.data.get('type', '')
         if 'video/mp4' in blob_type or 'video/webm' in blob_type:
             # Handle video chunks
-            print(request.data)
+            print('Printed file sent if video/mp4 or video/webm', request.data)
             serializer = VideoChunkSerializer(data=request.data)
             if serializer.is_valid():
                 video_chunk_instance = serializer.save()
@@ -54,7 +54,7 @@ class VideoChunkUploadView(APIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         elif 'application/octet-stream' in blob_type:
             # Handle binary chunks
-            print(request.data)
+            print('Printed file sent if octet-stream', request.data)
             chunk = request.data
             chunk_number = request.POST.get('chunk_number')
             file_id = request.POST.get('file_id')  # Identifier for the complete file
@@ -64,7 +64,7 @@ class VideoChunkUploadView(APIView):
             return Response("Chunk received and processed", status=status.HTTP_200_OK)
         else:
             # Handle unsupported content type
-            print(request.data)
+            print('Printed file sent if not supported content type', request.data)
             return Response("Unsupported content type", status=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
 # class VideoChunkUploadView(APIView):
 #     parser_classes = (MultiPartParser,)
