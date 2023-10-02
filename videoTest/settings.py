@@ -84,6 +84,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "videoTest.wsgi.application"
 
+# OPENAI_API_KEY  = config('OPENAI_API_KEY ')
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -108,7 +109,7 @@ DATABASES = {
 
 DATABASES["default"] = dj_database_url.parse(config('DATABASE_URL'))
 
-
+OPENAI_API_KEY= config('OPENAI_API_KEY')
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
