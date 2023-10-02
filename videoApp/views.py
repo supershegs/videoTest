@@ -19,6 +19,7 @@ class VideoChunkUploadView(APIView):
     parser_classes = (MultiPartParser,)
 
     def post(self, request, format=None):
+        print(request.data)
         if request.data.content_type == 'video/mp4' or request.data.content_type == 'video/webm':
             serializer = VideoChunkSerializer(data=request.data)
             if serializer.is_valid():
