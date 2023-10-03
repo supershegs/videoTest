@@ -1,9 +1,10 @@
 import assemblyai as aai
 import requests
+from decouple import config
 from rest_framework.response import Response
 
 from rest_framework import status
-aai.settings.api_key = f"3c78a774047f44a698694552baa8cf95"
+aai.settings.api_key = config('api_key')
 
 def audiotranscribe(audio_path):
     
