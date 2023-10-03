@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'videoApp',
     'corsheaders',
     'rest_framework',
-    'screenAPP'
+    # 'screenAPP'
 ]
 
 MIDDLEWARE = [
