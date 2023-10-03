@@ -15,7 +15,7 @@ from decouple import config
 import dj_database_url 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+import assemblyai as aai
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'videoApp',
     'corsheaders',
     'rest_framework',
+    'screenAPP'
 ]
 
 MIDDLEWARE = [
@@ -95,6 +96,8 @@ WSGI_APPLICATION = "videoTest.wsgi.application"
 #         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
+
+api_key = config('api_key')
 
 DATABASES = {
     # 'default': {   

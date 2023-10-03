@@ -1,4 +1,24 @@
 import os
+import openai
+import requests
+from rest_framework.response import Response 
+from rest_framework import status
+
+def transcribe(audio_path):
+    try:
+        with open(audio_path, "rb") as audio_file: 
+            print(audio_file)
+            manuscript = openai.Audio.transcribe("whisper-1", audio_file)
+    except FileNotFoundError:
+        return Response("Audio file not found")
+    except requests.exceptions.RequestException as e:
+        return Response(f"Error making a request to OpenAI API: {e}",status=status.HTTP_400_BAD_REQUEST)
+    except openai.OpenAIError as e:
+        return Response(f"OpenAI API error: {e}", status=status.HTTP_402_PAYMENT_REQUIRED)
+    except openai.error.AuthenticationError as e:
+        return Response(f"OpenAI authentication error: {e}", status=status.HTTP_401_UNAUTHORIZED)
+    except openai.error.APIError as e:
+        return Response(f"OpenAI API error: {e}",status=status.HTTP_408_REQUEST_TIMEOUT)
 
 def save_chunk_to_temporary_location(self, file_id, chunk_number, chunk):
     temporary_directory = "chunks"
